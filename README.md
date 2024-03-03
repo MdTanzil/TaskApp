@@ -1,8 +1,20 @@
-# React + Vite
+# Task App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Live Link
 
-Currently, two official plugins are available:
+[Task App](https://preeminent-sorbet-eef669.netlify.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Project features
+
+- This is Task Management App
+- You can Add task Update and Delete Task
+- Search Task
+- Add favorite
+
+### Technology
+
+<img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" /><img src="	https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" /><img src="https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E" />
+
+## Authors
+
+- [@MdTanzil](https://github.com/MdTanzil)
