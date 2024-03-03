@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Search from "./Search";
 import TaskAction from "./TaskAction";
 import TaskItem from "./TaskItem";
@@ -18,9 +18,34 @@ const TaskSheet = () => {
   ]);
 
   const handleTaskAdd = (task) => {
-    setTaskData([...taskData, task]);
-    setIsModalShow(false);
+    if (!isUpdateData) {
+      setTaskData([...taskData, task]);
+      setIsModalShow(false);
+    } else {
+      let filterData = taskData.map((data) => {
+        if (data.id == task.id) {
+          return task;
+        }
+        return data;
+      });
+      setTaskData(filterData);
+      setIsModalShow(false);
+      setIsUpdateData(null);
+    }
   };
+  const [isUpdateData, setIsUpdateData] = useState(null);
+  const handleUpdate = (task) => {
+    // console.log(task);
+    // setIsUpdateData(task)
+    // console.log(isUpdateData);
+    // setIsModalShow(true)
+    setIsUpdateData(task);
+  };
+  useEffect(() => {
+    if (isUpdateData !== null) {
+      setIsModalShow(true);
+    }
+  }, [isUpdateData]);
 
   return (
     <>
@@ -28,6 +53,8 @@ const TaskSheet = () => {
         <TaskAdd
           setIsModalShow={setIsModalShow}
           onSave={handleTaskAdd}
+          isUpdate={isUpdateData}
+          setIsUpdateData={setIsUpdateData}
         ></TaskAdd>
       )}
 
@@ -66,7 +93,11 @@ const TaskSheet = () => {
                 </thead>
                 <tbody>
                   {taskData.map((task) => (
-                    <TaskItem task={task} key={task.id}></TaskItem>
+                    <TaskItem
+                      task={task}
+                      key={task.id}
+                      onUpdateClick={handleUpdate}
+                    ></TaskItem>
                   ))}
                 </tbody>
               </table>

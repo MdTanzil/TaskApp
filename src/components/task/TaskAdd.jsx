@@ -2,16 +2,19 @@
 
 import { useState } from "react";
 
-const TaskAdd = ({ setIsModalShow, onSave }) => {
-  const [newTask, setNewTask] = useState({
-    id: crypto.randomUUID(),
-    title: "",
-    description: "",
-    tags: [],
-    priority: "",
-  });
+const TaskAdd = ({ setIsModalShow, onSave, isUpdate, setIsUpdateData }) => {
+  const [newTask, setNewTask] = useState(
+    isUpdate || {
+      id: crypto.randomUUID(),
+      title: "",
+      description: "",
+      tags: [],
+      priority: "",
+    }
+  );
   const handleModal = () => {
     setIsModalShow(false);
+    setIsUpdateData(null);
   };
 
   const handleChange = (e) => {
@@ -48,6 +51,7 @@ const TaskAdd = ({ setIsModalShow, onSave }) => {
             name="title"
             id="title"
             onChange={handleChange}
+            value={newTask.title}
             required
           />
         </div>
@@ -59,6 +63,7 @@ const TaskAdd = ({ setIsModalShow, onSave }) => {
             name="description"
             id="description"
             onChange={handleChange}
+            value={newTask.description}
             required
           ></textarea>
         </div>
@@ -72,6 +77,7 @@ const TaskAdd = ({ setIsModalShow, onSave }) => {
               id="tags"
               required
               onChange={handleChange}
+              value={newTask.tags}
             />
           </div>
 
@@ -82,6 +88,7 @@ const TaskAdd = ({ setIsModalShow, onSave }) => {
               name="priority"
               id="priority"
               onChange={handleChange}
+              value={newTask.priority}
               required
             >
               <option value="">Select Priority</option>
@@ -105,7 +112,7 @@ const TaskAdd = ({ setIsModalShow, onSave }) => {
           onClick={handleSubmit}
           className="rounded bg-blue-600 px-4 py-2 text-white transition-all hover:opacity-80"
         >
-          Create new Task
+          {isUpdate ? "Update Task" : "Create new Task"}
         </button>
       </div>
     </form>
