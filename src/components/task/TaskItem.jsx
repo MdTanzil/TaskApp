@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { FaStar } from "react-icons/fa";
 
-const TaskItem = ({ task, onUpdateClick }) => {
+const TaskItem = ({ task, onUpdateClick ,onDelete }) => {
   return (
     <tr className="border-b border-[#2E3443] [&>td]:align-baseline [&>td]:px-4 [&>td]:py-2">
       <td>
@@ -25,7 +25,7 @@ const TaskItem = ({ task, onUpdateClick }) => {
       <td className="text-center">{task.priority}</td>
       <td>
         <div className="flex items-center justify-center space-x-3">
-          <button className="text-red-500">Delete</button>
+          <button className="text-red-500" onClick={()=> onDelete(task)}>Delete</button>
           <button className="text-blue-500" onClick={() => onUpdateClick(task)}>
             Edit
           </button>

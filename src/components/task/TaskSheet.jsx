@@ -47,6 +47,11 @@ const TaskSheet = () => {
     }
   }, [isUpdateData]);
 
+  const handleDelete = (task) => {
+     
+    const filteredData = taskData.filter((data)=> data.id !== task.id)
+    setTaskData(filteredData)
+  };
   return (
     <>
       {isModalShow && (
@@ -97,6 +102,7 @@ const TaskSheet = () => {
                       task={task}
                       key={task.id}
                       onUpdateClick={handleUpdate}
+                      onDelete={handleDelete}
                     ></TaskItem>
                   ))}
                 </tbody>
