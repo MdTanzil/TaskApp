@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import Search from "./Search";
 import TaskAction from "./TaskAction";
-import TaskItem from "./TaskItem";
 import TaskAdd from "./TaskAdd";
+import TaskItem from "./TaskItem";
 
 const TaskSheet = () => {
   const [isModalShow, setIsModalShow] = useState(false);
@@ -48,10 +48,32 @@ const TaskSheet = () => {
   }, [isUpdateData]);
 
   const handleDelete = (task) => {
-     
-    const filteredData = taskData.filter((data)=> data.id !== task.id)
-    setTaskData(filteredData)
+    const filteredData = taskData.filter((data) => data.id !== task.id);
+    setTaskData(filteredData);
   };
+
+  const handleBookmark = (task) => {
+    let updateData = taskData.map((data) => {
+      if (data.id == task.id) {
+        task.isFavorite = !task.isFavorite;
+        return task;
+      }
+      return data;
+    });
+    setTaskData(updateData);
+  };
+
+  const handleAllDelete = () => {
+    setTaskData([]);
+  };
+
+  const handleSearch = (text) => {
+    const filterData = taskData.filter((data) =>
+      data.title.toLowerCase().includes(text.toLowerCase())
+    );
+    setTaskData(filterData);
+  };
+
   return (
     <>
       {isModalShow && (
@@ -65,10 +87,13 @@ const TaskSheet = () => {
 
       <section className="mb-20" id="tasks">
         <div className="container">
-          <Search></Search>
+          <Search onSearch={handleSearch}></Search>
 
           <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
-            <TaskAction setIsModalShow={setIsModalShow}></TaskAction>
+            <TaskAction
+              onDeleteAll={handleAllDelete}
+              setIsModalShow={setIsModalShow}
+            ></TaskAction>
             <div className="overflow-auto">
               <table className="table-fixed overflow-auto xl:w-full">
                 <thead>
@@ -103,6 +128,7 @@ const TaskSheet = () => {
                       key={task.id}
                       onUpdateClick={handleUpdate}
                       onDelete={handleDelete}
+                      onBookMark={handleBookmark}
                     ></TaskItem>
                   ))}
                 </tbody>

@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
 import { FaStar } from "react-icons/fa";
 
-const TaskItem = ({ task, onUpdateClick ,onDelete }) => {
+const TaskItem = ({ task, onUpdateClick ,onDelete , onBookMark}) => {
   return (
     <tr className="border-b border-[#2E3443] [&>td]:align-baseline [&>td]:px-4 [&>td]:py-2">
       <td>
-        <FaStar color={task.isFavorite ? "yellow" : "gray"}></FaStar>
+        <FaStar color={task.isFavorite ? "yellow" : "gray"} onClick={()=> onBookMark(task)}></FaStar>
       </td>
       <td>{task.title}</td>
       <td>
